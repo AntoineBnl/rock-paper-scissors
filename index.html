@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            let seed = Math.random() * 3;
+            switch(true) {
+                case seed <= 1 : return "rock";
+                case seed <= 2 : return "paper";
+                case seed <= 3 : return "scissors";
+            }
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            playerSelection = playerSelection.toLowerCase();
+            if (computerSelection == playerSelection) {
+                return "Tie game!";
+            } else if ( (computerSelection == "rock" && playerSelection == "scissors") 
+                     || (computerSelection == "scissors" && playerSelection == "paper")
+                     || (computerSelection == "paper" && playerSelection == "rock") )
+                {
+                    return `You lose! ${computerSelection} beats ${playerSelection}`;
+            } else {
+                return `You win! ${playerSelection} beats ${computerSelection}`;
+            }
+        }
+
+        function game() {
+            let playerSelection = null;
+            let score = [0,0];
+            let res = null;
+
+            for (let i = 0; i < 5; i++) {
+                playerSelection = prompt("Enter your selection (rock/paper/scissors):");
+                res = playRound(playerSelection, computerPlay());
+                console.log(res);
+                switch(true) {
+                    case res.includes("Tie"): break;
+                    case res.includes("You lose"): score[1]++; break;
+                    case res.includes("You win"): score[0]++;
+                }
+            }
+
+            switch(true) {
+                case score[1]-score[0] == 0 : console.log(`Tie: ${score[0]}-${score[1]}`);
+                case score[1]-score[0] > 0 : console.log(`You lose: ${score[0]}-${score[1]}`);
+                case score[1]-score[0] < 0 : console.log(`You win: ${score[0]}-${score[1]}`);
+            }
+        }
+
+    </script>
+</body>
+</html>
