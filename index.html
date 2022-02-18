@@ -1,59 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors</title>
+  <script src="game.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <script>
-        function computerPlay() {
-            let seed = Math.random() * 3;
-            switch(true) {
-                case seed <= 1 : return "rock";
-                case seed <= 2 : return "paper";
-                case seed <= 3 : return "scissors";
-            }
-        }
 
-        function playRound(playerSelection, computerSelection) {
-            playerSelection = playerSelection.toLowerCase();
-            if (computerSelection == playerSelection) {
-                return "Tie game!";
-            } else if ( (computerSelection == "rock" && playerSelection == "scissors") 
-                     || (computerSelection == "scissors" && playerSelection == "paper")
-                     || (computerSelection == "paper" && playerSelection == "rock") )
-                {
-                    return `You lose! ${computerSelection} beats ${playerSelection}`;
-            } else {
-                return `You win! ${playerSelection} beats ${computerSelection}`;
-            }
-        }
+  <header>Rock, Paper, Scissors</header>
 
-        function game() {
-            let playerSelection = null;
-            let score = [0,0];
-            let res = null;
+  <div class="wrapper">
+    <div class="container">
+      <div id="score">
+        <span>Player</span>
+        <span id="playerScore">0</span>
+        <span>-</span>
+        <span id="computerScore">0</span>
+        <span>Computer</span>
+      </div>
 
-            for (let i = 0; i < 5; i++) {
-                playerSelection = prompt("Enter your selection (rock/paper/scissors):");
-                res = playRound(playerSelection, computerPlay());
-                console.log(res);
-                switch(true) {
-                    case res.includes("Tie"): break;
-                    case res.includes("You lose"): score[1]++; break;
-                    case res.includes("You win"): score[0]++;
-                }
-            }
+      <div class="btn-container">
+        <button id="btn-rock">Rock</button>
+        <button id="btn-paper">Paper</button>
+        <button id="btn-scissors">Scissors</button>
+      </div>
 
-            switch(true) {
-                case score[1]-score[0] == 0 : console.log(`Tie: ${score[0]}-${score[1]}`);
-                case score[1]-score[0] > 0 : console.log(`You lose: ${score[0]}-${score[1]}`);
-                case score[1]-score[0] < 0 : console.log(`You win: ${score[0]}-${score[1]}`);
-            }
-        }
+      <div id="results">Click a button to play!</div>
+    </div>
+  </div>
 
-    </script>
+  <footer>
+    <script> document.write(new Date().getFullYear()) </script>
+    <a href="https://github.com/antoinebnl">AntoineBnl</a>
+  </footer>
+
 </body>
 </html>
